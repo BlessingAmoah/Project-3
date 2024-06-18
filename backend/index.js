@@ -7,10 +7,12 @@ const app = express()
 const prisma = new PrismaClient()
 const port = process.env.PORT || 3002
 
+
+
 const config = require('./config');
 
-// Use the DATABASE_HOSTED_URL variable here
-const dbUrl = config.DATABASE_HOSTED_URL;
+// Use the config variables
+console.log(config.DATABASE_HOSTED_URL);
 
 app.use(cors())
 app.use(express.json())
