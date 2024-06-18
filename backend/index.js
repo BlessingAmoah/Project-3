@@ -14,13 +14,10 @@ app.use(express.json())
 
 
 // Routes
-//app.get('/', (req, res) => {
-  //  res.send('Hello World! I am the server!')
-//})
-
-app.get('/api/boards', (req, res) => {
-    res.json('Hello World! I am the server!')
+app.get('/', (req, res) => {
+    res.send('Hello World! I am the server!')
 })
+
 
 
 
