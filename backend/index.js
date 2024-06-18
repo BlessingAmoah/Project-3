@@ -18,6 +18,9 @@ app.get('/', (req, res) => {
     res.send('Hello World! I am the server!')
 })
 
+app.get('/api/boards', (req, res) => {
+    res.send('Hello World! I am the server!')
+})
 
 
 
@@ -27,7 +30,7 @@ const cardRoutes = require('./routes/cardRoutes')
 
 app.use('/api/boards', boardRoutes);
 app.use('/api/cards', cardRoutes);
-app.use('/api', router)
+
 
 
 app.listen(port, () => {
