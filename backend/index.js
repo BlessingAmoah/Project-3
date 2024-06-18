@@ -24,7 +24,7 @@ app.get('/', (req, res) => {
     res.send('Hello World! I am the server!')
 })
 
-router.get('/', async (req, res) => {
+app.get('/', async (req, res) => {
     try {
         const boards = await prisma.board.findMany();
         res.json(boards);
