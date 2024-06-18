@@ -24,7 +24,7 @@ const App = () => {
 
   const fetchBoards = async () => {
     try {
-      const response = await fetch(process.env.REACT_APP_API_URL + '/api/boards');
+      const response = await fetch('https://backend-ldgy.onrender.com/api/boards');
       if (response.ok) {
         throw new Error(`Something went wrong ${response.status}`);
     }
