@@ -1,6 +1,7 @@
 const express = require('express')
 const { PrismaClient } = require('@prisma/client')
 const cors = require('cors')
+const router = express.Router()
 
 
 const app = express()
@@ -23,9 +24,15 @@ app.get('/', (req, res) => {
     res.send('Hello World! I am the server!')
 })
 
-app.get('/api/boards', (req, res) => {
-    res.send('boards')
-})
+router.get('/', async (req, res) => {
+    try {
+        const boards = await prisma.board.findMany();
+        res.json(boards);
+    } catch (error) {
+        console.error('There is an error fetching boards: ', error);
+        res.status(500).json({ error: 'There was an error fetching boards' });
+    }
+});
 
 
 
