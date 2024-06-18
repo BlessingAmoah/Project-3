@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "npx prisma generate && node index.js"
   },
   "keywords": [],
   "author": "",
@@ -14,6 +14,7 @@
     "@prisma/client": "^5.15.1",
     "cors": "^2.8.5",
     "express": "^4.19.2",
-    "pg": "^8.12.0"
+    "pg": "^8.12.0",
+    "prisma": "^5.15.1"
   }
 }
