@@ -19,12 +19,17 @@ app.use(express.json())
 
 
 // Routes
+app.get('/', (req, res) => {
+    res.send('Hello World!')
+})
+
 
 const boardRoutes = require('./routes/boardRoutes')
 const cardRoutes = require('./routes/cardRoutes')
 
 app.use('/api/boards', boardRoutes);
 app.use('/api/cards', cardRoutes);
+
 
 app.listen(port, () => {
     console.log(`Server is running on port http://localhost${port}`)
