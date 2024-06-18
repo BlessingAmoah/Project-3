@@ -24,15 +24,6 @@ app.get('/', (req, res) => {
     res.send('Hello World! I am the server!')
 })
 
-app.get('/', async (req, res) => {
-    try {
-        const boards = await prisma.board.findMany();
-        res.send(boards);
-    } catch (error) {
-        console.error('There is an error fetching boards: ', error);
-        res.status(500).json({ error: 'There was an error fetching boards' });
-    }
-});
 
 
 
