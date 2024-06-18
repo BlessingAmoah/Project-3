@@ -24,14 +24,8 @@ app.get('/', (req, res) => {
 })
 
 app.get('/', async (req, res) => {
-    try {
-        const boards = await prisma.board.findMany();
-        res.json(boards);
-    } catch (error) {
-        console.error('There is an error fetching boards: ', error);
-        res.status(500).json({ error: 'There was an error fetching boards' });
-    }
-});
+   res.send(boardRoutes);
+})
 const boardRoutes = require('./routes/boardRoutes')
 const cardRoutes = require('./routes/cardRoutes')
 
