@@ -25,6 +25,7 @@ const App = () => {
   const fetchBoards = async () => {
     try {
       const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/boards}`);
+      console.log(response);
       if (response.ok) {
         throw new Error(`Something went wrong ${response.status}`);
     }
