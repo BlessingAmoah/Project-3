@@ -3,21 +3,18 @@ import { Link } from 'react-router-dom';
 import {
   Container, Grid, Card, CardContent, Typography, Button, MenuItem, Select, InputLabel, FormControl,
   Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField, CardMedia,
-IconButton, InputBase, Paper} from '@mui/material';
+  IconButton, InputBase, Paper
+} from '@mui/material';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import SearchIcon from '@mui/icons-material/Search';
 import { styled } from '@mui/system';
 
-
-const HoverCard = styled(card) ({
-
-    transition: 'transform 0.2s',
-    '&:hover': {
-      transform: 'scale(1.05)',
-    },
-
-  });
-
+const HoverCard = styled(Card)({
+  transition: 'transform 0.2s',
+  '&:hover': {
+    transform: 'scale(1.05)',
+  },
+});
 
 const BoardData = [
   { id: 1, image: 'https://images5.alphacoders.com/136/thumb-1920-1364852.png', title: 'Celebration', description: "Won 2024 Champions League", Author: "Blessing", category: "Celebration", upvotes: 0 },
@@ -27,7 +24,6 @@ const BoardData = [
 ];
 
 const Dashboard = () => {
-  const classes =useStyles();
   const [boards, setBoards] = useState(BoardData);
   const [filter, setFilter] = useState('all');
   const [open, setOpen] = useState(false);
@@ -57,7 +53,7 @@ const Dashboard = () => {
   };
 
   const handleUpvote = (id) => {
-    setBoards (boards.map(board => board.id === id ? { ...board, upvotes: board.upvotes + 1 } : board));
+    setBoards(boards.map(board => board.id === id ? { ...board, upvotes: board.upvotes + 1 } : board));
   };
 
   const handleSearchChange = (event) => {
@@ -65,28 +61,14 @@ const Dashboard = () => {
   };
 
   const filteredBoards = boards.filter((board) =>
-  (filter === 'all' || board.category === filter) &&
-  (board.title.toLowerCase().includes(searchTerm.toLowerCase ()) ||
-  board.description.toLowerCase().includes(searchTerm.toLowerCase()))
+    (filter === 'all' || board.category === filter) &&
+    (board.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      board.description.toLowerCase().includes(searchTerm.toLowerCase()))
   );
 
   return (
     <Container>
-
-      <Paper className={classes.search}>
-        <InputBase
-        className={classes.SearchInput}
-        placeholder="Search Boards"
-        inputProps={{ 'aria-label': 'search boards'}}
-        value = {searchTerm}
-        onChange={handleSearchChange}
-        />
-        <IconButton type="submit" className={classes.searchButton} arial-label="search">
-          <SearchIcon />
-        </IconButton>
-      </Paper>
       <Dialog open={open} onClose={handleClose}>
-
         <DialogContent>
           <DialogContentText>
             Add a new board to the dashboard
@@ -112,7 +94,7 @@ const Dashboard = () => {
         </DialogActions>
       </Dialog>
       <FormControl fullWidth margin="normal">
-      <InputLabel>Filter by Category</InputLabel>
+        <InputLabel>Filter by Category</InputLabel>
         <Select value={filter} onChange={handleFilterChange}>
           <MenuItem value="all">All</MenuItem>
           <MenuItem value="Celebration">Celebration</MenuItem>
@@ -121,11 +103,23 @@ const Dashboard = () => {
           <MenuItem value="Recent">Recent</MenuItem>
         </Select>
       </FormControl>
+      <Paper className={classes.search}>
+        <InputBase
+          className={classes.searchInput}
+          placeholder="Search Boards"
+          inputProps={{ 'aria-label': 'search boards' }}
+          value={searchTerm}
+          onChange={handleSearchChange}
+        />
+        <IconButton type="submit" className={classes.searchButton} aria-label="search">
+          <SearchIcon />
+        </IconButton>
+      </Paper>
       <Button variant="contained" color="secondary" onClick={handleClickOpen} margin="10px">Add New Board</Button>
       <Grid container spacing={3} margin="10px">
         {filteredBoards.map((board) => (
           <Grid item xs={12} sm={6} md={4} key={board.id}>
-            <Card>
+            <HoverCard>
               {board.image && (
                 <CardMedia component="img" height={300} image={board.image} alt={board.title} />
               )}
@@ -136,22 +130,21 @@ const Dashboard = () => {
                 <Typography variant="body2" color="textSecondary">{board.description}</Typography>
                 <Typography variant="body2" color="textSecondary">Author: {board.Author}</Typography>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-
-            <div>
-                <IconButton color="primary" onClick={() => handleUpvote(board.id)}>
-                  <ThumbUpIcon />
-                  <Typography variant="body2" color="textSecondary">{board.upvotes}</Typography>
-                </IconButton>
-              </div>
-              <div>
-                <Button variant="contained" color="primary" component={Link} to={`/board/${board.id}`}>View</Button>
-              </div>
-                <div>
-                <Button variant="contained" color="secondary" onClick={() => setBoards(boards.filter(b => b.id !== board.id))}>Delete</Button>
-              </div>
+                  <div>
+                    <IconButton color="primary" onClick={() => handleUpvote(board.id)}>
+                      <ThumbUpIcon />
+                      <Typography variant="body2" color="textSecondary">{board.upvotes}</Typography>
+                    </IconButton>
+                  </div>
+                  <div>
+                    <Button variant="contained" color="primary" component={Link} to={`/board/${board.id}`}>View</Button>
+                  </div>
+                  <div>
+                    <Button variant="contained" color="secondary" onClick={() => setBoards(boards.filter(b => b.id !== board.id))}>Delete</Button>
+                  </div>
                 </div>
               </CardContent>
-            </Card>
+            </HoverCard>
           </Grid>
         ))}
       </Grid>
