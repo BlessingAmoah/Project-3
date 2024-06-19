@@ -15,7 +15,7 @@ const BoardView = ({ boards }) => {
         <Container>
             <Button onClick={() => navigate(-1)} variant="contained" color="primary" style={{marginBottom: '20px'}}>Back</Button>
             <Card>
-                {board.image && (<CardMedia component="img" width="100" height= "500" image={board.image} alt={board.title} style={{ width: '50%', margin: '0 auto'}}/>)}
+                {board.image && (<CardMedia component="img" width="100" height= "400" image={board.image} alt={board.title} style={{ width: '40%', margin: '0 auto'}}/>)}
                 <CardContent>
                     <Typography variant="h5">{board.title}</Typography>
                     <Typography variant="body2" color="textSecondary">{board.description}</Typography>
