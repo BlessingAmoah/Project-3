@@ -3,8 +3,21 @@ import { Link } from 'react-router-dom';
 import {
   Container, Grid, Card, CardContent, Typography, Button, MenuItem, Select, InputLabel, FormControl,
   Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField, CardMedia,
-IconButton} from '@mui/material';
+IconButton, InputBase, Paper} from '@mui/material';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import SearchIcon from '@mui/icons-material/Search';
+import { styled } from '@mui/system';
+
+
+const HoverCard = styled(card) ({
+
+    transition: 'transform 0.2s',
+    '&:hover': {
+      transform: 'scale(1.05)',
+    },
+
+  });
+
 
 const BoardData = [
   { id: 1, image: 'https://images5.alphacoders.com/136/thumb-1920-1364852.png', title: 'Celebration', description: "Won 2024 Champions League", Author: "Blessing", category: "Celebration", upvotes: 0 },
@@ -14,10 +27,12 @@ const BoardData = [
 ];
 
 const Dashboard = () => {
+  const classes =useStyles();
   const [boards, setBoards] = useState(BoardData);
   const [filter, setFilter] = useState('all');
   const [open, setOpen] = useState(false);
   const [newBoard, setNewBoard] = useState({ image: '', title: '', description: '', Author: '', category: 'Celebration', upvotes: 0 });
+  const [searchTerm, setSearchTerm] = useState('');
 
   const handleFilterChange = (event) => {
     setFilter(event.target.value);
@@ -45,12 +60,31 @@ const Dashboard = () => {
     setBoards (boards.map(board => board.id === id ? { ...board, upvotes: board.upvotes + 1 } : board));
   };
 
-  const filteredBoards = boards.filter((board) => filter === 'all' || board.category === filter);
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const filteredBoards = boards.filter((board) =>
+  (filter === 'all' || board.category === filter) &&
+  (board.title.toLowerCase().includes(searchTerm.toLowerCase ()) ||
+  board.description.toLowerCase().includes(searchTerm.toLowerCase()))
+  );
 
   return (
     <Container>
 
-
+      <Paper className={classes.search}>
+        <InputBase
+        className={classes.SearchInput}
+        placeholder="Search Boards"
+        inputProps={{ 'aria-label': 'search boards'}}
+        value = {searchTerm}
+        onChange={handleSearchChange}
+        />
+        <IconButton type="submit" className={classes.searchButton} arial-label="search">
+          <SearchIcon />
+        </IconButton>
+      </Paper>
       <Dialog open={open} onClose={handleClose}>
 
         <DialogContent>
