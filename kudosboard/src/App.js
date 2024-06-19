@@ -12,7 +12,7 @@ const BoardData = [
   { id: 1, image: 'https://www.codepath.org/hubfs/homepage_ftl.png', title: 'Celebration', description: "Celebrating Success", Author: "Jane Doe", category: "Celebration", upvotes: 0 },
   { id: 2, image: 'https://www.codepath.org/hubfs/homepage_ftl.png', title: 'Thank You', description: "Thanks for the Hardwork", Author: "Blessing", category: "Thank You", upvotes: 0 },
   { id: 3, image: 'https://www.codepath.org/hubfs/homepage_ftl.png', title: 'Inspiration', description: "Motivation for the day", Author: "Jane Doe", category: "Inspirational", upvotes: 0 },
-  { id: 4, image: 'https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMmJ1dTRod2c1Y3dqcnJmczN5YThtbm0zZXhlOTdod2Rmb3puYXJsMiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/SggILpMXO7Xt6/giphy.gif', title: 'Recent', description: "Recent Cards", Author: "Gideon", category: "Recent", upvotes: 0 },
+  { id: 4, image: 'https://www.codepath.org/hubfs/homepage_ftl.png', title: 'Recent', description: "Recent Cards", Author: "Gideon", category: "Recent", upvotes: 0 },
 ];
 
 const App = () => {
@@ -24,7 +24,7 @@ const App = () => {
 
   const fetchBoards = async () => {
     try {
-      const response = await fetch('https://backend-ldgy.onrender.com/api/boards');
+      const response = await fetch(process.env.REACT_APP_API_URL + '/api/boards');
       if (response.ok) {
         throw new Error(`Something went wrong ${response.status}`);
     }
