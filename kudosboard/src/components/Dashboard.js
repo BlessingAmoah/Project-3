@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import {
   Container, Grid, Card, CardContent, Typography, Button, MenuItem, Select, InputLabel, FormControl,
   Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField, CardMedia,
-  IconButton, InputBase, Paper
+  IconButton, InputBase, Paper, ToggleButton, ToggleButtonGroup
 } from '@mui/material';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import SearchIcon from '@mui/icons-material/Search';
@@ -16,11 +16,34 @@ const HoverCard = styled(Card)({
   },
 });
 
+const SearchContainer = styled(Paper)({
+  display: 'flex',
+  alignItems: 'center',
+  padding: '2px 4px',
+  marginBottm: '20px'
+})
+
+const SearchInput = styled(InputBase)({
+  marginLeft: '8px',
+  flex: 1,
+})
+
+const SearchIconButton = styled(IconButton)({
+  padding: 10,
+});
+
+const FilterButtonGroup = styled(ToggleButtonGroup)({
+  display: 'flex',
+  justfiyContent: 'center',
+  marginBottom: '20px',
+  padding: '20px'
+})
+
 const BoardData = [
   { id: 1, image: 'https://images5.alphacoders.com/136/thumb-1920-1364852.png', title: 'Celebration', description: "Won 2024 Champions League", Author: "Blessing", category: "Celebration", upvotes: 0 },
   { id: 2, image: 'https://www.codepath.org/hubfs/homepage_ftl.png', title: 'Thank You', description: "Thanks for the Hardwork", Author: "Blessing", category: "Thank You", upvotes: 0 },
-  { id: 3, image: 'https://www.codepath.org/hubfs/homepage_ftl.png', title: 'Inspiration', description: "Motivation for the day", Author: "Jane Doe", category: "Inspirational", upvotes: 0 },
-  { id: 4, image: 'https://www.codepath.org/hubfs/homepage_ftl.png', title: 'Recent', description: "Recent Cards", Author: "Gideon", category: "Recent", upvotes: 0 },
+  { id: 3, image: 'https://www.codepath.org/hubfs/homepage_ftl.png', title: 'Recent', description: "Recent Cards", Author: "Gideon", category: "Recent", upvotes: 0 },
+  { id: 4, image: 'https://www.codepath.org/hubfs/homepage_ftl.png', title: 'Inspiration', description: "Motivation", Author: "Gideon", category: "Inspiration", upvotes: 0 },
 ];
 
 const Dashboard = () => {
@@ -30,8 +53,8 @@ const Dashboard = () => {
   const [newBoard, setNewBoard] = useState({ image: '', title: '', description: '', Author: '', category: 'Celebration', upvotes: 0 });
   const [searchTerm, setSearchTerm] = useState('');
 
-  const handleFilterChange = (event) => {
-    setFilter(event.target.value);
+  const handleFilterChange = (event, newFilter) => {
+    setFilter(newFilter);
   };
 
   const handleClickOpen = () => {
@@ -93,29 +116,40 @@ const Dashboard = () => {
           <Button onClick={handleAddBoard} color="primary">Save</Button>
         </DialogActions>
       </Dialog>
-      <FormControl fullWidth margin="normal">
-        <InputLabel>Filter by Category</InputLabel>
-        <Select value={filter} onChange={handleFilterChange}>
-          <MenuItem value="all">All</MenuItem>
-          <MenuItem value="Celebration">Celebration</MenuItem>
-          <MenuItem value="Thank You">Thank You</MenuItem>
-          <MenuItem value="Inspirational">Inspiration</MenuItem>
-          <MenuItem value="Recent">Recent</MenuItem>
-        </Select>
-      </FormControl>
-      <Paper className={classes.search}>
-        <InputBase
-          className={classes.searchInput}
+      <SearchContainer>
+        <SearchInput
           placeholder="Search Boards"
           inputProps={{ 'aria-label': 'search boards' }}
           value={searchTerm}
           onChange={handleSearchChange}
         />
-        <IconButton type="submit" className={classes.searchButton} aria-label="search">
+        <SearchIconButton type="submit"  aria-label="search">
           <SearchIcon />
-        </IconButton>
-      </Paper>
-      <Button variant="contained" color="secondary" onClick={handleClickOpen} margin="10px">Add New Board</Button>
+        </SearchIconButton>
+      </SearchContainer>
+      <FilterButtonGroup
+      value={filter}
+      exclusive
+      onChange={handleFilterChange}
+      aria-label='text alignment'
+      >
+        <ToggleButton value="all" aria-label='all'>
+          All
+        </ToggleButton>
+        <ToggleButton value="Recent" aria-label='recent'>
+          Recent
+        </ToggleButton>
+        <ToggleButton value="Celebration" aria-label='celebration'>
+          Celebration
+        </ToggleButton>
+        <ToggleButton value="Thank You" aria-label='thank you'>
+          Thank You
+        </ToggleButton>
+        <ToggleButton value="Inspiration" aria-label='inspiration'>
+          Inspiration
+        </ToggleButton>
+      </FilterButtonGroup>
+      <Button variant="contained" color="secondary" onClick={handleClickOpen} margin="10px" alignItems='center'>Add New Board</Button>
       <Grid container spacing={3} margin="10px">
         {filteredBoards.map((board) => (
           <Grid item xs={12} sm={6} md={4} key={board.id}>
