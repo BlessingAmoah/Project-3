@@ -5,7 +5,6 @@ import {
   Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField, CardMedia,
 IconButton} from '@mui/material';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
-import SearchBar from '../components/SearchBar';
 
 const BoardData = [
   { id: 1, image: 'https://images5.alphacoders.com/136/thumb-1920-1364852.png', title: 'Celebration', description: "Won 2024 Champions League", Author: "Blessing", category: "Celebration", upvotes: 0 },
@@ -19,7 +18,6 @@ const Dashboard = () => {
   const [filter, setFilter] = useState('all');
   const [open, setOpen] = useState(false);
   const [newBoard, setNewBoard] = useState({ image: '', title: '', description: '', Author: '', category: 'Celebration', upvotes: 0 });
-  const [searchQuery, setSearchQuery] = useState('');
 
   const handleFilterChange = (event) => {
     setFilter(event.target.value);
@@ -47,30 +45,10 @@ const Dashboard = () => {
     setBoards (boards.map(board => board.id === id ? { ...board, upvotes: board.upvotes + 1 } : board));
   };
 
-  const handleSearch = async (query) => {
-    try {
-      setSearchQuery(query);
-      const searchResults = await fetch(`/api/boards?search=${query}`);
-      setBoards(searchResults);
-    } catch (error) {
-      console.error('Error searching boards:', error);
-    }
-    };
-
-
   const filteredBoards = boards.filter((board) => filter === 'all' || board.category === filter);
 
   return (
     <Container>
-
-    <Grid container spacing={3}>
-        <SearchBar onSearch={handleSearch} />
-      </Grid>
-      {searchQuery && (
-        <Grid item xs={12}>
-        <Typography variant ="h5">Search Results for "{searchQuery}"</Typography>
-        </Grid>
-      )}
 
 
       <Dialog open={open} onClose={handleClose}>
@@ -82,7 +60,7 @@ const Dashboard = () => {
           <TextField autoFocus margin="dense" name="title" label="Title" type="text" fullWidth value={newBoard.title} onChange={handleSubmit} />
           <TextField margin="dense" name="description" label="Description" type="text" fullWidth value={newBoard.description} onChange={handleSubmit} />
           <TextField margin="dense" name="Author" label="Author" type="text" fullWidth value={newBoard.Author} onChange={handleSubmit} />
-          <TextField margin="dense" name="image" label="Image URL / GIF " type="text" fullWidth value={newBoard.image} onChange={handleSubmit} />
+          <TextField margin="dense" name="image" label="Image URL /GIF " type="text" fullWidth value={newBoard.image} onChange={handleSubmit} />
           <FormControl fullWidth margin="normal">
             <InputLabel>Category</InputLabel>
             <Select name="category" value={newBoard.category} onChange={handleSubmit}>
