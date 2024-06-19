@@ -9,6 +9,11 @@ const port = process.env.PORT || 3002
 
 
 
+const config = require('./config');
+
+// Use the config variables
+console.log(config.DATABASE_HOSTED_URL);
+
 app.use(cors())
 app.use(express.json())
 
@@ -27,7 +32,6 @@ const cardRoutes = require('./routes/cardRoutes')
 
 app.use('/api/boards', boardRoutes);
 app.use('/api/cards', cardRoutes);
-
 
 
 app.listen(port, () => {
