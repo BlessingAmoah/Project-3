@@ -12,7 +12,7 @@ const port = process.env.PORT || 3002
 const config = require('./config');
 
 // Use the config variables
-console.log(config.DATABASE_URL);
+console.log(config.DATABASE_HOSTED_URL);
 
 app.use(cors())
 app.use(express.json())
