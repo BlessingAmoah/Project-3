@@ -5,7 +5,10 @@ import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import Login from './components/Login'
+import useToken from './components/useToken';
 import './App.css';
+
 
 
 const BoardData = [
@@ -39,18 +42,41 @@ const App = () => {
     }
   };
 
+  const { token, setToken, removeToken } = useToken();
+
+
+  if (!token) {
+    return <Login setToken={setToken} />;
+  }
+
+  const handleLogout = () => {
+    removeToken();
+  };
+
+
 
   return (
     <Router>
       <Navbar />
       <Header />
       <Routes>
-        <Route path="/" element={<Dashboard  boards={boards} setBoards={setBoards}/>} />
+        <Route path="/Login" element={<Login />} />
+        <Route path="/dashboard" element={<Dashboard boards={boards} setBoards={setBoards}/>} />
         <Route path="/board/:id" element={<BoardView boards={boards}/>} />
+        <Route
+            path="/"
+            element={<Dashboard onLogout={handleLogout} />}
+          ></Route>
+          <Route
+            path="/dashboard"
+            element={<Dashboard onLogout={handleLogout} />}
+          ></Route>
       </Routes>
       <Footer />
     </Router>
   );
 };
+
+
 
 export default App;

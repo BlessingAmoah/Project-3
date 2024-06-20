@@ -23,6 +23,10 @@ app.get('/', (req, res) => {
     res.send('Hello World! I am the server!')
 })
 
+app.post('/login', (req, res) => {
+
+    res.json({ token: 'example_token' });
+  });
 
 
 
