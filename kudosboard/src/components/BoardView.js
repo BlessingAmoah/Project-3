@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 
 import { useNavigate, useParams } from 'react-router-dom';
-import { Container,Box,  Card, CardContent, Typography,Grid, Button, CardMedia, MenuItem, Select, InputLabel, FormControl, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField, IconButton } from '@mui/material';
+import { Container, Card, CardContent, Typography,Grid, Button, CardMedia, MenuItem, Select, InputLabel, FormControl, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField, IconButton } from '@mui/material';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 
 
@@ -14,7 +14,7 @@ const BoardView = ({ boards, cardId }) => {
     const [originalBoard, setOriginalBoard] = useState(board);
 
     const [cardComments, setCardComments] = useState({});
-    const [ comment, setComment] = useState({})
+
 
     const [cards, setCards] = useState([]);
   const [open, setOpen] = useState(false);
@@ -113,14 +113,11 @@ const BoardView = ({ boards, cardId }) => {
                   </DialogContentText>
                   <TextField
                     value={cardComments[(cardId)] || ''}
-                    onChange={(e) => setComment((cardComments),e.target.value)}
+                    onChange={(e) => handleComment(board.id,e.target.value)}
                     margin="dense"
                     fullWidth
                     label="Write a comment"
                   />
-                  <Box>
-                    <Button sx={{ml: 'auto'}}  value={comment} onClick={() => handleComment ((cardId), comment)}>Save Comment</Button>
-                  </Box>
             </Card>
 
             </Grid>
@@ -145,15 +142,13 @@ const BoardView = ({ boards, cardId }) => {
                     Your Comment Here!
                   </DialogContentText>
                   <TextField
-                    value={comment}
-                    onChange={(e) => setComment(e.target.value)}
+                    value={cardComments[card.id] || ''}
+                    onChange={(e) => handleComment(card.id, e.target.value)}
                     margin="dense"
                     fullWidth
                     label="Write a comment"
                   />
-                  <Box>
-                    <Button sx={{ml: 'auto'}}  value={comment} onClick={handleComment}>Save Comment</Button>
-                  </Box>
+
         </div>
       </Card>
 

@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Container, Grid, TextField, Button } from '@mui/material';
 
 
-async function authenticateUser(credentials) {
-    return fetch(`https://backend-ldgy.onrender.com`, {
+async function authenticateUser(credentials, endpoint) {
+    return fetch(`http://localhost:3002/${endpoint}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
