@@ -3,7 +3,7 @@ import { Container, Grid, TextField, Button } from '@mui/material';
 
 
 async function authenticateUser(credentials, endpoint) {
-    return fetch(process.env.REACT_APP_API_URL + '/api/boards', {
+    return fetch(`http://localhost:3002/${endpoint}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
