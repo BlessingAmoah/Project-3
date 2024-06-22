@@ -185,7 +185,8 @@ const Dashboard = () => {
                 <Typography variant="h5">
                   <Link to={`/board/${board.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>{board.title}</Link>
                 </Typography>
-                <Typography variant="body2" color="textSecondary">{board.description}</Typography>
+                <Typography variant="body2" color="textSecondary">Title: {board.title}</Typography>
+                <Typography variant="body2" color="textSecondary">Description: {board.description}</Typography>
                 <Typography variant="body2" color="textSecondary">Author: {board.Author}</Typography>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <div>

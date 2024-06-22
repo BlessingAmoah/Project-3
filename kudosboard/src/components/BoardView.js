@@ -97,8 +97,8 @@ const BoardView = ({ boards, cardId }) => {
                   <CardMedia component="img" height={300} image={originalBoard.image} alt={board.title} />
                 )}
                 <CardContent>
-                    <Typography variant="h5">{board.title}</Typography>
-                    <Typography variant="body2" color="textSecondary">{board.description}</Typography>
+                    <Typography variant="h5">Title: {board.title}</Typography>
+                    <Typography variant="body2" color="textSecondary">Description: {board.description}</Typography>
                     <Typography variant="body2" color="textSecondary"> Author: {board.Author}</Typography>
                 </CardContent>
                 <IconButton color="primary" onClick={() => handleUpvote(board.id)}>
@@ -112,7 +112,7 @@ const BoardView = ({ boards, cardId }) => {
                     Your Comment Here!
                   </DialogContentText>
                   <TextField
-                    value={cardComments[(cardId)] || ''}
+                    value={cardComments[(boards)] || ''}
                     onChange={(e) => handleComment(board.id,e.target.value)}
                     margin="dense"
                     fullWidth

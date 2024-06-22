@@ -4,6 +4,8 @@ Submitted by: Blessing Amoah
 
 Deployed Application (optional): [Kudos Board Deployed Site](https://frontend-srx7.onrender.com)
 
+My render works but because I added the login feature and it runs on the localhost server. It is not possible for the render to open if the server is not running so if in case you want to test to see if my deployment works with the link provided then you will need to fork it and run the server on your local machine which the host is 3002. If there is anything I can share a video of it working.
+
 ### Application Features
 
 #### CORE FEATURES
@@ -35,20 +37,20 @@ Deployed Application (optional): [Kudos Board Deployed Site](https://frontend-sr
 
 - [ ] **User Accounts**
   - [x ] Users should be able to log in with a username and password.
-  - [ ] Users should be able to sign up for a new account.
+  - [ x] Users should be able to sign up for a new account.
   - [ ]  Boards and cards should be associated with a user.
     - [ ]  Anonymous cards or cards by guest users should still be allowed.
   - [ ] Add a new filter option on the home page to display only the current user's boards.
   - [ ] Allow boards to be deleted only if they are owned by the user.
 - [x ] **Deployment**
   - [ x] Website is deployed via Render.
-- [ ] **Comments**
-  - [ ] Users should be able to comment on cards.
+- [x ] **Comments**
+  - [x] Users should be able to comment on cards.
 
 
 ### Walkthrough Video
 
-[Kudosboard](https://www.loom.com/share/09e91f54c0994547ba313d4acff0b9c6?sid=81068ea7-09c6-42bc-93f5-f6e612cf2e81)
+[Kudosboard](https://www.loom.com/share/fb7eaf3d675e4aeea2f63e228beac869?sid=c0c5e1a3-3f5b-4215-88ef-acf8e4abccc7)
 
 ### Reflection
 
